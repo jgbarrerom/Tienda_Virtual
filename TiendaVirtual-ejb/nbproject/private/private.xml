@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Producto.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/conf/persistence.xml</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Persona.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Categoria.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Comprador.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/logica/PruebaBean.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Orden.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/InformacionFactura.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Vendedor.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/setup/glassfish-resources.xml</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/InformacionEnvio.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/TipoIdentificacion.java</file>
+        </group>
+    </open-files>
+</project-private>
