@@ -5,8 +5,16 @@
  */
 package co.com.logica;
 
+import java.util.concurrent.TimeUnit;
+import javax.ejb.AccessTimeout;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.DependsOn;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,8 +26,6 @@ import javax.persistence.PersistenceContext;
 @LocalBean
 public class PruebaBean {
     
-    @PersistenceContext
+    @PersistenceContext//(unitName = "jndi/natuchis")
     EntityManager em;
-    
-    
 }
