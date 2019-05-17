@@ -57,14 +57,14 @@ public class ClienteEJB extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             
-            Producto pro = administacionPersistencia.consultarProducto(1);
+            Producto pro = administacionPersistencia.consultarProducto(4);
             administracionOrden.adicionarProducto(pro);
             pro = new Producto();
-            pro = administacionPersistencia.consultarProducto(2);
+            pro = administacionPersistencia.consultarProducto(5);
             administracionOrden.adicionarProducto(pro);
             
             Comprador com = new Comprador();
-            com.setLogin("MARIA");
+            com.setLogin("maria");
             administracionOrden.adicionarComprador(com);
             
             InformacionEnvio infEnv = new InformacionEnvio();
@@ -75,7 +75,7 @@ public class ClienteEJB extends HttpServlet {
             administracionOrden.adicionarInformacionEnvio(infEnv);
             
             InformacionFactura infFac = new InformacionFactura();
-            infFac.setCodigoTarjeta("00001");
+            infFac.setCodigoTarjeta("0001");
             infFac.setFechaExpiracion(new Date());
             infFac.setNumeroTarjeta("23456789");
             administracionOrden.adicionarInformacionFactura(infFac);
