@@ -10,7 +10,7 @@ import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Producto;
 import co.com.logica.AdministracionOrdenLocal;
-import co.com.logica.AdministracionPersistenciaLocal;
+import co.com.logica.AdministracionPersistenciaJPALocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -26,8 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ClienteEJB extends HttpServlet {
     
+    //AdministracionPersistenciaLocal administacionPersistencia;
     @EJB
-    AdministracionPersistenciaLocal administacionPersistencia;
+    AdministracionPersistenciaJPALocal administacionPersistencia;
     
     @EJB
     AdministracionOrdenLocal administracionOrden;
@@ -63,8 +64,7 @@ public class ClienteEJB extends HttpServlet {
             pro = administacionPersistencia.consultarProducto(5);
             administracionOrden.adicionarProducto(pro);
             
-            Comprador com = new Comprador();
-            com.setLogin("maria");
+            Comprador com = administacionPersistencia.consultaComprador("pedro");
             administracionOrden.adicionarComprador(com);
             
             InformacionEnvio infEnv = new InformacionEnvio();

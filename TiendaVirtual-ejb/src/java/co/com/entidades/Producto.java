@@ -5,17 +5,21 @@
  */
 package co.com.entidades;
 
+import co.com.auditoria.MonitoreoProducto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +29,11 @@ import javax.persistence.TemporalType;
  * @version 1.0
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findAllProductos" ,query = "SELECT p FROM Producto p"),
+    @NamedQuery(name = "findProdById", query = "SELECT p FROM Producto p WHERE p.id = :idParam")
+})
+@EntityListeners(MonitoreoProducto.class)
 public class Producto implements Serializable{
 
     @Id

@@ -5,6 +5,7 @@
  */
 package co.com.logica;
 
+import co.com.auditoria.CreacionOrdenInterceptor;
 import co.com.entidades.Comprador;
 import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
@@ -16,6 +17,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -31,6 +33,9 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     
     @EJB
     AdministracionPersistenciaLocal administracionPersistencia;
+    
+    @EJB
+    AdministracionPersistenciaJPALocal administracionPersistenciaJPALocal;
     
     public AdministracionOrden() {
         productos = new ArrayList<>();
@@ -52,9 +57,8 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         this.infoEnvio = infoEnv;
     }
 
-    @Override
-    @Remove
-    public Integer crearOrdenCompra() {
+    @Deprecated
+    public Integer crearOrdenCompra(String a) {
         infoEnvio.setId(administracionPersistencia.crearInformacionEnvio(infoEnvio));
         infoFactura.setId(administracionPersistencia.crearInformacionFactura(infoFactura));
         
@@ -67,6 +71,23 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         ord.setId(administracionPersistencia.crearOrden(ord));
         administracionPersistencia.modificarProductos(productos, ord);
         return ord.getId();
+    }
+    
+    @Override
+    @Remove
+    @Interceptors(CreacionOrdenInterceptor.class)
+    public Integer crearOrdenCompra(){
+        administracionPersistenciaJPALocal.crearInformacionEnvio(infoEnvio);
+        administracionPersistenciaJPALocal.crearInformacionFactura(infoFactura);
+        Orden ord = new Orden();
+        ord.setComprador(comprador);
+        ord.setFecha(Calendar.getInstance().getTime());
+        ord.setInformacionEnvio(infoEnvio);
+        ord.setInformacionFactura(infoFactura);
+        administracionPersistenciaJPALocal.crearOrden(ord);
+        administracionPersistenciaJPALocal.modificarProductos(productos, ord);
+        return ord.getId();
+        
     }
 
     @Override
@@ -81,12 +102,11 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
 
     @Override
     public Comprador getComprador() {
-        return null;
+        return comprador;
     }
 
     @Override
     public List consultaCarroCompras() {
         return null;
     }
-    
 }

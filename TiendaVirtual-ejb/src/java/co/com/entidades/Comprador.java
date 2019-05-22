@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -18,6 +20,9 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue(value = "C")
+@NamedQueries({
+    @NamedQuery(name = "findAllComprador" , query = "SELECT c FROM Comprador c")
+})
 public class Comprador extends Persona {
     /**
      * cuando hay una relacion bidireccional tiene que haber un dueño que se define en el mappedBy
