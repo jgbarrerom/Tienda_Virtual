@@ -11,6 +11,10 @@ import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Orden;
 import co.com.entidades.Producto;
+import co.com.excepciones.CrearOrdenException;
+import co.com.excepciones.ModificarProductoException;
+import co.com.notificaciones.EntidadFinancieraInterceptor;
+import co.com.notificaciones.NotificacionInterceptor;
 import java.util.Calendar;
 import java.util.List;
 import javax.annotation.Resource;
@@ -19,6 +23,11 @@ import javax.ejb.Stateless;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -28,11 +37,13 @@ import javax.persistence.Query;
  * @author jeisson
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionPersistenciaJPA implements AdministracionPersistenciaJPALocal {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "TiendaVirtual-ejbPU")
     private EntityManager em;
-    
+
     @Resource
     private TimerService timerService;
 
@@ -42,36 +53,50 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
-    public Integer crearOrden(Orden orden) {
-        em.persist(orden);
-        timerService.createTimer(15000, orden);
-        return orden.getId();
+    @Interceptors({NotificacionInterceptor.class, EntidadFinancieraInterceptor.class})
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Integer crearOrden(Orden orden) throws CrearOrdenException {
+        try {
+            em.persist(orden);
+            timerService.createTimer(15000, orden);
+            return orden.getId();
+        } catch (Exception e) {
+            throw new CrearOrdenException(e);
+        }
     }
-    
+
     @Timeout
-    private void timerCrearOrden(Timer timer){
-        Orden ord = (Orden)timer.getInfo();
+    private void timerCrearOrden(Timer timer) {
+        Orden ord = (Orden) timer.getInfo();
         System.out.println("Se ha enviado la orden a la direccion "
-        + ord.getInformacionEnvio().getDireccion());
+                + ord.getInformacionEnvio().getDireccion());
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionEnvio(InformacionEnvio ie) {
         em.persist(ie);
         return ie.getId();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionFactura(InformacionFactura infFac) {
         em.persist(infFac);
         return infFac.getId();
     }
 
     @Override
-    public void modificarProductos(List<Producto> productos, Orden orden) {
-        for (Producto pro : productos) {
-            pro.setOrden(orden);
-            em.merge(pro);
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void modificarProductos(List<Producto> productos, Orden orden) throws ModificarProductoException {
+        try {
+            for (Producto pro : productos) {
+                pro.setOrden(orden);
+                em.merge(pro);
+            }
+            //throw new ModificarProductoException("Error de prueba");
+        } catch (Exception e) {
+            throw new ModificarProductoException(e);
         }
     }
 
@@ -88,6 +113,7 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearBitacora(Bitacora bitacora) {
         em.merge(bitacora);
         return bitacora.getId();

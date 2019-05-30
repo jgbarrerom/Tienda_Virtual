@@ -4,6 +4,17 @@
     <jta-data-source>jdbc/tiendaVirtualDB</jta-data-source>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="entidades1"/>
+      <!-- SE ESTABLECE EL NOMBRE DE LA CARPETA PARA CADA ENTITY MODEL-->
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="TiendaVirtual-ejbPU2" transaction-type="JTA">
+    <jta-data-source>jdbc/entidadFinancieraDB</jta-data-source>
+    <class>co.com.entidades.InformacionFactura</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="entidades2"/>
     </properties>
   </persistence-unit>
 </persistence>

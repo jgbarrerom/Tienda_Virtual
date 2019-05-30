@@ -9,11 +9,15 @@ import co.com.entidades.Comprador;
 import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Producto;
+import co.com.excepciones.CrearOrdenException;
+import co.com.excepciones.ModificarProductoException;
 import co.com.logica.AdministracionOrdenLocal;
 import co.com.logica.AdministracionPersistenciaJPALocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,7 +84,13 @@ public class ClienteEJB extends HttpServlet {
             infFac.setNumeroTarjeta("23456789");
             administracionOrden.adicionarInformacionFactura(infFac);
             
-            administracionOrden.crearOrdenCompra();
+            try {
+                administracionOrden.crearOrdenCompra();
+            } catch (CrearOrdenException ex) {
+                System.out.println("" + ex.getMessage());
+            } catch (ModificarProductoException ex) {
+                System.out.println("" + ex.getMessage());
+            }
         }
     }
 

@@ -11,6 +11,8 @@ import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Orden;
 import co.com.entidades.Producto;
+import co.com.excepciones.CrearOrdenException;
+import co.com.excepciones.ModificarProductoException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -33,7 +35,7 @@ public interface AdministracionPersistenciaJPALocal {
      * @param orden
      * @return
      */
-    public Integer crearOrden(Orden orden);
+    public Integer crearOrden(Orden orden) throws CrearOrdenException;
 
     /**
      *
@@ -54,7 +56,7 @@ public interface AdministracionPersistenciaJPALocal {
      * @param productos
      * @param orden
      */
-    public void modificarProductos(List<Producto> productos, Orden orden);
+    public void modificarProductos(List<Producto> productos, Orden orden) throws ModificarProductoException;
 
     /**
      * 

@@ -18,12 +18,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author jeisson
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Orden implements Serializable{
 
     @Id
@@ -34,6 +38,7 @@ public class Orden implements Serializable{
     private Date fecha;
 
     @OneToMany(mappedBy = "orden")
+    @XmlTransient
     private List<Producto> productos;
 
     @ManyToOne(optional = false)//PERMITE NULL SI O NO

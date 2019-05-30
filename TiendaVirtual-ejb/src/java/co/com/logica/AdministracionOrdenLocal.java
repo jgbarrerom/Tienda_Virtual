@@ -9,6 +9,8 @@ import co.com.entidades.Comprador;
 import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Producto;
+import co.com.excepciones.CrearOrdenException;
+import co.com.excepciones.ModificarProductoException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -25,7 +27,7 @@ public interface AdministracionOrdenLocal {
 
     public void adicionarInformacionEnvio(InformacionEnvio infoEnv);
 
-    public Integer crearOrdenCompra();
+    public Integer crearOrdenCompra() throws CrearOrdenException, ModificarProductoException;
 
     public void cancelarOrdenCompra();
 

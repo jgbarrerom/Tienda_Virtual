@@ -25,7 +25,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class PruebaBean {
-    
-    @PersistenceContext//(unitName = "jndi/natuchis")
+
+    @PersistenceContext(unitName = "TiendaVirtual-ejbPU")
+    @Deprecated
     EntityManager em;
 }

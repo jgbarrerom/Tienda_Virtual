@@ -13,12 +13,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author jeisson
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Categoria implements Serializable{
 
     @Id
@@ -28,6 +32,7 @@ public class Categoria implements Serializable{
     private String descripcion;
     
     @ManyToMany(mappedBy = "categorias")//EL DUEÑO DE LA RELACION PUEDE SER CUALQUIERA CUANDO ES MUCHOS A MUCHOS BIDIRECCIONAL
+    @XmlTransient
     private List<Producto> productos;
 
     public int getId() {

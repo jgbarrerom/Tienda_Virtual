@@ -13,6 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +26,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "findAllComprador" , query = "SELECT c FROM Comprador c")
 })
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Comprador extends Persona {
     /**
      * cuando hay una relacion bidireccional tiene que haber un dueño que se define en el mappedBy
@@ -31,6 +35,7 @@ public class Comprador extends Persona {
      * no molesta por el @Id ya que lo hereda del padre
      */
     @OneToMany(mappedBy = "comprador")
+    @XmlTransient
     private List<Orden> ordenes;
     @Column(name = "CANTIDAD_COMPRAS")
     private int cantidadCompras;

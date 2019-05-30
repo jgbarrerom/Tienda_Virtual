@@ -11,12 +11,18 @@ import co.com.entidades.InformacionEnvio;
 import co.com.entidades.InformacionFactura;
 import co.com.entidades.Orden;
 import co.com.entidades.Producto;
+import co.com.excepciones.CrearOrdenException;
+import co.com.excepciones.ModificarProductoException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 
 /**
@@ -24,6 +30,8 @@ import javax.interceptor.Interceptors;
  * @author jeisson
  */
 @Stateful
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)//para los que no se especifica el tipo de transaccionalidad coloca NOT_SUPPORTED
 public class AdministracionOrden implements AdministracionOrdenLocal {
 
     private List<Producto> productos;
@@ -76,7 +84,8 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     @Override
     @Remove
     @Interceptors(CreacionOrdenInterceptor.class)
-    public Integer crearOrdenCompra(){
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public Integer crearOrdenCompra() throws CrearOrdenException, ModificarProductoException{
         administracionPersistenciaJPALocal.crearInformacionEnvio(infoEnvio);
         administracionPersistenciaJPALocal.crearInformacionFactura(infoFactura);
         Orden ord = new Orden();
@@ -84,6 +93,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         ord.setFecha(Calendar.getInstance().getTime());
         ord.setInformacionEnvio(infoEnvio);
         ord.setInformacionFactura(infoFactura);
+        ord.setProductos(productos);
         administracionPersistenciaJPALocal.crearOrden(ord);
         administracionPersistenciaJPALocal.modificarProductos(productos, ord);
         return ord.getId();
