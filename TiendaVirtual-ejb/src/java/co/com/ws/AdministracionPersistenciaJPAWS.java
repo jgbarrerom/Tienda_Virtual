@@ -30,52 +30,52 @@ import javax.jws.WebService;
 public class AdministracionPersistenciaJPAWS {
 
     @EJB
-    private AdministracionPersistenciaJPALocal ejbRef;// Add business logic below. (Right-click in editor and choose
+    private AdministracionPersistenciaJPALocal admPersistenciaJPA;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
     @WebMethod(operationName = "consultarProducto")
     public Producto consultarProducto(@WebParam(name = "idProducto") int idProducto) {
-        return ejbRef.consultarProducto(idProducto);
+        return admPersistenciaJPA.consultarProducto(idProducto);
     }
 
     @WebMethod(operationName = "crearOrden")
     public Integer crearOrden(@WebParam(name = "orden") Orden orden) throws CrearOrdenException {
-        return ejbRef.crearOrden(orden);
+        return admPersistenciaJPA.crearOrden(orden);
     }
 
     @WebMethod(operationName = "crearInformacionEnvio")
     public Integer crearInformacionEnvio(@WebParam(name = "ie") InformacionEnvio ie) {
-        return ejbRef.crearInformacionEnvio(ie);
+        return admPersistenciaJPA.crearInformacionEnvio(ie);
     }
 
     @WebMethod(operationName = "crearInformacionFactura")
     public Integer crearInformacionFactura(@WebParam(name = "infFac") InformacionFactura infFac) {
-        return ejbRef.crearInformacionFactura(infFac);
+        return admPersistenciaJPA.crearInformacionFactura(infFac);
     }
 
     @WebMethod(operationName = "modificarProductos")
     public void modificarProductos(@WebParam(name = "productos") List<Producto> productos, @WebParam(name = "orden") Orden orden) throws ModificarProductoException {
-        ejbRef.modificarProductos(productos, orden);
+        admPersistenciaJPA.modificarProductos(productos, orden);
     }
 
     @WebMethod(operationName = "consultaComprador")
     public Comprador consultaComprador(@WebParam(name = "login") String login) {
-        return ejbRef.consultaComprador(login);
+        return admPersistenciaJPA.consultaComprador(login);
     }
 
     @WebMethod(operationName = "consultaProductos")
     public List<Producto> consultaProductos() {
-        return ejbRef.consultaProductos();
+        return admPersistenciaJPA.consultaProductos();
     }
 
     @WebMethod(operationName = "crearBitacora")
     public Integer crearBitacora(@WebParam(name = "bitacora") Bitacora bitacora) {
-        return ejbRef.crearBitacora(bitacora);
+        return admPersistenciaJPA.crearBitacora(bitacora);
     }
 
     @WebMethod(operationName = "consultaCompradores")
     public List<Comprador> consultaCompradores() {
-        return ejbRef.consultaCompradores();
+        return admPersistenciaJPA.consultaCompradores();
     }
     
 }

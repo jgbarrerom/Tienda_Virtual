@@ -117,6 +117,6 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
 
     @Override
     public List consultaCarroCompras() {
-        return null;
+        return productos;
     }
 }

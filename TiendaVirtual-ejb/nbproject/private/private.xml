@@ -20,6 +20,7 @@
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/mensajeria/EmpresaFabricanteMessage.java</file>
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Persona.java</file>
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/auditoria/CreacionOrdenInterceptor.java</file>
+            <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/entidades/Orden.java</file>
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/logica/AdministracionOrden.java</file>
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/logica/AdministracionOrdenLocal.java</file>
             <file>file:/home/jeisson/Documents/UNAL/TiendaVirtual/TiendaVirtual-ejb/src/java/co/com/ws/AdministracionPersistenciaJPAWS.java</file>

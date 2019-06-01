@@ -52,6 +52,8 @@ public class Orden implements Serializable{
     @OneToOne(optional = false)
     @JoinColumn(name = "ID_INF_ENVIO")
     private InformacionEnvio informacionEnvio;
+    
+    
 
     public int getId() {
         return id;
